@@ -1,4 +1,4 @@
-MONEY TRACKER - SETUP GUIDE (v4)
+MONEY TRACKER - SETUP GUIDE (v5)
 ================================
 
 FILES
@@ -10,6 +10,25 @@ UPDATING FROM AN OLD VERSION
 - If the phone still shows the old version, close the app and open it again.
 
 
+WHAT'S NEW IN v5
+----------------
+1. "Show more" in History now works.
+   - It only appears when there are more items, and shows how many are left.
+2. Dashboard now shows CURRENT BALANCE = the real money left in your Cash + Banks + E-wallets.
+   - Breakdown: Cash / Banks / E-wallets. Savings, Debt and Net worth are below it.
+   - Loans are NOT counted as your money. They only show as Debt.
+3. "Update balances" button (on the dashboard card):
+   - Type the actual amount in each account (check your GCash/bank app and your wallet).
+   - The app fixes the difference and saves it as "Balance update" in History.
+   - Balance updates are NOT counted as income or expense.
+   - You can also fix one account: Accounts > ⋯ > Current balance.
+4. Loans no longer add money to your balance by default.
+   - Only check "Add the loan money to my account balance" if the money just came in
+     and is still in that account.
+   - Old loans that added money: open the loan > Edit loan > check
+     "Remove the loan money from ..." > Save.
+
+
 STEP 1 - PUT THE APP ONLINE (free)
 ----------------------------------
 1. Create a free account at github.com
@@ -17,7 +36,6 @@ STEP 1 - PUT THE APP ONLINE (free)
 3. "Add file" > "Upload files" > upload the 5 app files > Commit
 4. Settings > Pages > Source: Deploy from a branch > main / (root) > Save
 5. After 1-2 minutes: https://YOUR-USERNAME.github.io/money-tracker/
-Quick PC test only: double-click index.html (data stays in that browser only).
 
 
 STEP 2 - INSTALL ON SAMSUNG A35 / PC
@@ -36,43 +54,17 @@ STEP 3 - CLOUD SYNC WITH GOOGLE SHEETS
 5. Copy the Web App URL (ends with /exec)
 6. In the app: Settings > Cloud sync > paste URL + same secret key > Save settings
 7. Do step 6 on your other device.
-- Tabs in the Sheet: Summary, Transactions, Accounts, Debts, Debt Schedule.
 - Do not edit or delete the hidden "_data" tab.
 
 
-LOANS - END MONTH (NEW)
------------------------
-When adding a loan (Debt page > + Add):
-1. Enter the Total amount, Payment schedule, and First due date.
-2. Enter the "Last payment month" (example: Apr 2027).
-   - The No. of payments and the Usual amount per payment fill in automatically.
-   - Or type the No. of payments and the Last payment month fills in.
-3. Optional: check "Amount is different per month" to type each month's amount.
-- Months after the last payment month are automatically 0.
-- If you are past the last month and still have a balance, it shows in red.
-- You can change the last month anytime: Edit loan, or inside "Amount per month".
-
-
-FIXING WRONG ENTRIES (EDIT / DELETE)
-------------------------------------
-- History (Budget page): tap any item > change it > Save changes, or Delete.
-- Loan details > History: tap any item:
-    "Started"  -> edit the loan total
-    "Added"    -> edit or delete the added amount
-    "Payment"  -> edit or delete the payment
-- Amount per month: tap the box to change it, or tap ✕ to clear a wrong amount.
-- Every change recalculates all totals, balances, and dues automatically.
-
-
-THEME & COLORS
---------------
-Settings (gear icon) > Theme & colors
-- Background: Auto, Light, Soft grey, Warm white, Dim, Dark grey, Black.
-- Main color: pick a preset or tap 🎨 for any color.
+LOANS
+-----
+- Add: Debt page > + Add > Type, Total, Schedule, First due date, Last payment month.
+- Different amount per month: check the box, then type each month's amount.
+- Fix mistakes: tap any item in the loan History to edit or delete it.
 
 
 KEEPING YOUR DATA SAFE
 ----------------------
 - Data is never deleted unless YOU delete it (Erase all data needs you to type DELETE).
-- Do not clear browser/site data for the app. If it happens, cloud sync restores everything.
 - Settings > Export backup (JSON) / Import backup. Export to Excel (CSV) is also available.
