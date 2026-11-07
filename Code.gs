@@ -1,7 +1,7 @@
 /**
  * Money Tracker - Google Sheets Cloud Sync
  * Paste this in: Google Sheet > Extensions > Apps Script
- * 1) Change SECRET_KEY below to your own password (letters/numbers).
+ * 1) Change SECRET_KEY below to your own secret (letters/numbers).
  * 2) Deploy > New deployment > Web app
  *    Execute as: Me   |   Who has access: Anyone
  * 3) Copy the Web App URL and paste it in the app: Settings > Cloud sync.
