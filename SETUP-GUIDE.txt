@@ -1,4 +1,4 @@
-MONEY TRACKER - SETUP GUIDE (v3)
+MONEY TRACKER - SETUP GUIDE (v4)
 ================================
 
 FILES
@@ -12,13 +12,11 @@ UPDATING FROM AN OLD VERSION
 
 STEP 1 - PUT THE APP ONLINE (free)
 ----------------------------------
-GitHub Pages:
 1. Create a free account at github.com
 2. New repository (example: money-tracker), Public
 3. "Add file" > "Upload files" > upload the 5 app files > Commit
 4. Settings > Pages > Source: Deploy from a branch > main / (root) > Save
 5. After 1-2 minutes: https://YOUR-USERNAME.github.io/money-tracker/
-
 Quick PC test only: double-click index.html (data stays in that browser only).
 
 
@@ -42,45 +40,35 @@ STEP 3 - CLOUD SYNC WITH GOOGLE SHEETS
 - Do not edit or delete the hidden "_data" tab.
 
 
+LOANS - END MONTH (NEW)
+-----------------------
+When adding a loan (Debt page > + Add):
+1. Enter the Total amount, Payment schedule, and First due date.
+2. Enter the "Last payment month" (example: Apr 2027).
+   - The No. of payments and the Usual amount per payment fill in automatically.
+   - Or type the No. of payments and the Last payment month fills in.
+3. Optional: check "Amount is different per month" to type each month's amount.
+- Months after the last payment month are automatically 0.
+- If you are past the last month and still have a balance, it shows in red.
+- You can change the last month anytime: Edit loan, or inside "Amount per month".
+
+
+FIXING WRONG ENTRIES (EDIT / DELETE)
+------------------------------------
+- History (Budget page): tap any item > change it > Save changes, or Delete.
+- Loan details > History: tap any item:
+    "Started"  -> edit the loan total
+    "Added"    -> edit or delete the added amount
+    "Payment"  -> edit or delete the payment
+- Amount per month: tap the box to change it, or tap ✕ to clear a wrong amount.
+- Every change recalculates all totals, balances, and dues automatically.
+
+
 THEME & COLORS
 --------------
 Settings (gear icon) > Theme & colors
-- Background: Auto (follows phone), Light, Soft grey, Warm white, Dim, Dark grey, Black.
-- Main color: Charcoal, Graphite, Grey, Steel, Slate, Navy, Teal, Plum, Silver,
-  or tap the paint icon to pick any color.
-- Changes apply right away and are synced to your other devices.
-- Red = money out, Green = money in (always).
-
-
-DEBTS & LOANS WITH DIFFERENT AMOUNTS PER MONTH
-----------------------------------------------
-Example: SPayLater = 2,000 this month, 1,000 next month.
-
-New loan:
-1. Debt page > + Add > choose Type (SPayLater, Pag-IBIG Loan, SSS Loan, etc.)
-2. Enter Total amount, Payment schedule (Monthly, Yearly, etc.), Due date.
-3. Check "Amount is different per month / period".
-4. Tap "Save & set amounts per period".
-5. Type the amount for each month (e.g., Nov 2,000 / Dec 1,000).
-   - Blank = uses the usual amount.
-   - 0 = no payment that month.
-   - "Fill blanks" = puts one amount on all empty future months.
-   - The box at the bottom tells you if the plan matches your remaining debt.
-
-Existing loan:
-- Tap the loan > "Amount per month" button > edit the amounts > Save.
-
-New SPayLater order:
-- Tap the loan > "+ Add amount" > enter the new order amount > Save.
-  It opens the monthly amounts next, so you can update each month right away.
-
-Pay:
-- Tap the loan > Pay. It pre-fills the exact amount due for this month.
-
-Dashboard:
-- Dues this month = total of all loan payments due this month (uses your exact amounts).
-- Still unpaid = how much you still need to pay this period.
-- Each loan shows: Due / Overdue (red) / Paid this period + next due and amount.
+- Background: Auto, Light, Soft grey, Warm white, Dim, Dark grey, Black.
+- Main color: pick a preset or tap 🎨 for any color.
 
 
 KEEPING YOUR DATA SAFE
