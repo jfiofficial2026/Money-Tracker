@@ -1,12 +1,12 @@
-MONEY TRACKER - SETUP GUIDE
-===========================
+MONEY TRACKER - SETUP GUIDE (v3)
+================================
 
 FILES
 - index.html, sw.js, manifest.json, icon-192.png, icon-512.png  -> the app (upload all together)
 - Code.gs                                                        -> Google Sheets cloud sync (optional)
 
-UPDATING FROM THE OLD VERSION
-- Just replace the old files with these new ones (same link). Your data stays.
+UPDATING FROM AN OLD VERSION
+- Replace the old files with these new ones (same link). Your data stays.
 - If the phone still shows the old version, close the app and open it again.
 
 
@@ -38,37 +38,49 @@ STEP 3 - CLOUD SYNC WITH GOOGLE SHEETS
 5. Copy the Web App URL (ends with /exec)
 6. In the app: Settings > Cloud sync > paste URL + same secret key > Save settings
 7. Do step 6 on your other device.
-
-- Changes are saved on the device first (works offline), then synced when online.
-- The Sheet shows tabs: Summary, Transactions, Accounts, Debts.
+- Tabs in the Sheet: Summary, Transactions, Accounts, Debts, Debt Schedule.
 - Do not edit or delete the hidden "_data" tab.
 
 
-DEBTS & LOANS (SPayLater, Pag-IBIG, SSS, etc.)
-----------------------------------------------
-Add:
-- Debt page > + Add > choose the Type (SPayLater, GGives, Pag-IBIG Loan, SSS Loan,
-  Credit Card, Home Credit, etc.) or type your own.
-- Enter Total amount, Payment schedule (One-time, Weekly, Every 15 days, Monthly,
-  Quarterly, Yearly), Amount per payment, No. of payments (optional), and Due date.
-  If you enter the total and no. of payments, the amount per payment is computed for you.
-- "I received this as cash in an account": ON for cash loans (Pag-IBIG MPL, SSS, GLoan),
-  OFF for SPayLater / credit purchases (it turns off automatically for these types).
+THEME & COLORS
+--------------
+Settings (gear icon) > Theme & colors
+- Background: Auto (follows phone), Light, Soft grey, Warm white, Dim, Dark grey, Black.
+- Main color: Charcoal, Graphite, Grey, Steel, Slate, Navy, Teal, Plum, Silver,
+  or tap the paint icon to pick any color.
+- Changes apply right away and are synced to your other devices.
+- Red = money out, Green = money in (always).
 
-New SPayLater order / amount changed:
-- Tap the debt > "+ Add" > enter the new amount and the NEW amount per payment.
-  The total and monthly due update right away. History keeps every addition.
-- You can also tap "Edit" anytime to change the amount per payment manually.
+
+DEBTS & LOANS WITH DIFFERENT AMOUNTS PER MONTH
+----------------------------------------------
+Example: SPayLater = 2,000 this month, 1,000 next month.
+
+New loan:
+1. Debt page > + Add > choose Type (SPayLater, Pag-IBIG Loan, SSS Loan, etc.)
+2. Enter Total amount, Payment schedule (Monthly, Yearly, etc.), Due date.
+3. Check "Amount is different per month / period".
+4. Tap "Save & set amounts per period".
+5. Type the amount for each month (e.g., Nov 2,000 / Dec 1,000).
+   - Blank = uses the usual amount.
+   - 0 = no payment that month.
+   - "Fill blanks" = puts one amount on all empty future months.
+   - The box at the bottom tells you if the plan matches your remaining debt.
+
+Existing loan:
+- Tap the loan > "Amount per month" button > edit the amounts > Save.
+
+New SPayLater order:
+- Tap the loan > "+ Add amount" > enter the new order amount > Save.
+  It opens the monthly amounts next, so you can update each month right away.
 
 Pay:
-- Tap the debt > Pay. It pre-fills the amount due this period. Choose the account and fee.
-  The payment is deducted from your account and shown in your History.
+- Tap the loan > Pay. It pre-fills the exact amount due for this month.
 
 Dashboard:
-- Monthly dues = total of all your installments per month.
-- Unpaid this period = what you still need to pay for the current month/period.
-- Each card shows: Due date, Overdue (red), or Paid this period (green) + next due date.
-- Filter by type using the chips (e.g., only SPayLater).
+- Dues this month = total of all loan payments due this month (uses your exact amounts).
+- Still unpaid = how much you still need to pay this period.
+- Each loan shows: Due / Overdue (red) / Paid this period + next due and amount.
 
 
 KEEPING YOUR DATA SAFE

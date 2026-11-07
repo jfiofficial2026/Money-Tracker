@@ -10,8 +10,7 @@
 <link rel="icon" href="icon-192.png">
 <title>Money Tracker</title>
 <style>
-:root{--bg:#fff;--fg:#000;--mut:#707070;--line:#e8e8e8;--soft:#f3f3f3;--red:#d0021b;--green:#08883a;--sh:rgba(0,0,0,.18)}
-[data-theme=dark]{--bg:#000;--fg:#fff;--mut:#9a9a9a;--line:#232323;--soft:#141414;--red:#ff4d5e;--green:#2fd16f;--sh:rgba(0,0,0,.6)}
+:root{--bg:#fff;--fg:#1d1d1f;--mut:#6e6e73;--line:#e6e6e8;--soft:#f2f2f4;--card:#fff;--acc:#2c2c2e;--accfg:#fff;--red:#d0021b;--green:#08883a;--hpos:#5fe39a;--hneg:#ff8a95;--sh:rgba(0,0,0,.16)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{background:var(--bg);color:var(--fg);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-tap-highlight-color:transparent;overflow:hidden;-webkit-text-size-adjust:100%}
@@ -31,10 +30,10 @@ header h1{font-size:19px;font-weight:800;letter-spacing:-.3px;flex:1}
 .page{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;overflow-y:auto;padding:14px 16px 110px;overscroll-behavior-y:contain}
 @media(min-width:900px){.tabs{display:none}.pager{overflow:hidden;gap:28px;padding:0 16px}.page{flex:1 1 0;padding:14px 4px 110px}}
 .card{border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
-.hero{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.hero .lbl{color:inherit;opacity:.65}
-.hero .pos{color:#3ee07f}.hero .neg{color:#ff6b78}
-[data-theme=dark] .hero .pos{color:#08883a}[data-theme=dark] .hero .neg{color:#d0021b}
+.card{background:var(--card)}
+.hero{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+.hero .lbl{color:inherit;opacity:.7}
+.hero .pos{color:var(--hpos)}.hero .neg{color:var(--hneg)}
 .lbl{font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
 .big{font-size:32px;font-weight:800;letter-spacing:-.8px;font-variant-numeric:tabular-nums;line-height:1.15;margin-top:2px;word-break:break-all}
 .mid{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
@@ -45,15 +44,15 @@ header h1{font-size:19px;font-weight:800;letter-spacing:-.3px;flex:1}
 .pos{color:var(--green)}.neg{color:var(--red)}.mut{color:var(--mut)}
 .num{font-variant-numeric:tabular-nums}
 .sm{font-size:12.5px}
-.sec{display:flex;align-items:center;justify-content:space-between;margin:20px 0 10px}
+.sec{display:flex;align-items:center;justify-content:space-between;margin:20px 0 10px;gap:8px}
 .sec h3{font-size:16px;font-weight:800}
-.lnk{font-weight:700;font-size:13.5px;padding:6px 10px;border:1px solid var(--line);border-radius:999px}
+.lnk{font-weight:700;font-size:13.5px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
 .bar{height:6px;background:var(--soft);border-radius:99px;overflow:hidden;margin-top:8px}
-.bar i{display:block;height:100%;background:var(--fg);border-radius:99px}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:99px}
 .bar.over i{background:var(--red)}
 .accs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
-.acc{border:1px solid var(--line);border-radius:14px;padding:12px;text-align:left;position:relative;min-width:0}
-.acc.on{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.acc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:left;position:relative;min-width:0}
+.acc.on{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
 .acc .n{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:22px}
 .acc .ty{font-size:11px;color:var(--mut)}
 .acc .b{font-weight:800;font-variant-numeric:tabular-nums;margin-top:4px;word-break:break-all}
@@ -78,9 +77,9 @@ header h1{font-size:19px;font-weight:800;letter-spacing:-.3px;flex:1}
 .debt .sched{font-size:13px;margin-top:6px;display:flex;justify-content:space-between;gap:8px}
 .debt .sched span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tag{display:inline-block;font-size:10.5px;font-weight:700;border:1px solid currentColor;border-radius:6px;padding:0 5px;margin-right:4px;text-transform:uppercase}
-.fab{position:fixed;right:max(20px,calc(50% - 580px));bottom:calc(22px + env(safe-area-inset-bottom));width:60px;height:60px;border-radius:50%;background:var(--fg);color:var(--bg);font-size:32px;line-height:1;box-shadow:0 8px 22px var(--sh);z-index:10}
+.fab{position:fixed;right:max(20px,calc(50% - 580px));bottom:calc(22px + env(safe-area-inset-bottom));width:60px;height:60px;border-radius:50%;background:var(--acc);color:var(--accfg);font-size:32px;line-height:1;box-shadow:0 8px 22px var(--sh);z-index:10}
 .fab:active{transform:scale(.95)}
-dialog{border:0;padding:0;width:100%;max-width:540px;max-height:94vh;max-height:94dvh;border-radius:22px 22px 0 0;margin:auto auto 0;background:var(--bg);color:var(--fg);overflow:hidden}
+dialog{border:0;padding:0;width:100%;max-width:540px;max-height:94vh;max-height:94dvh;border-radius:22px 22px 0 0;margin:auto auto 0;background:var(--card);color:var(--fg);overflow:hidden}
 @media(min-width:640px){dialog{border-radius:22px;margin:auto}}
 dialog::backdrop{background:rgba(0,0,0,.5)}
 .si{padding:16px 16px calc(20px + env(safe-area-inset-bottom));overflow-y:auto;max-height:94vh;max-height:94dvh}
@@ -95,12 +94,12 @@ input[type=checkbox]{width:20px;height:20px;min-height:0;padding:0;accent-color:
 .amtin{font-size:30px;font-weight:800;text-align:center;letter-spacing:-.5px;margin-top:12px}
 .seg{display:flex;background:var(--soft);border-radius:12px;padding:4px;gap:4px}
 .seg button{flex:1;padding:10px 4px;border-radius:9px;font-weight:700;color:var(--mut);font-size:14px}
-.seg button.on{background:var(--fg);color:var(--bg)}
+.seg button.on{background:var(--acc);color:var(--accfg)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips.scroll{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
 .chips.scroll::-webkit-scrollbar{display:none}
 .chip{border:1px solid var(--line);border-radius:999px;padding:8px 13px;font-size:13.5px;white-space:nowrap;font-weight:600}
-.chip.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip.on{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
 .chip small{font-weight:500;opacity:.7}
 .row2{display:grid;grid-template-columns:1.4fr 1fr;gap:8px;margin-top:8px}
 .row2.eq{grid-template-columns:1fr 1fr;margin-top:0}
@@ -108,20 +107,36 @@ input[type=checkbox]{width:20px;height:20px;min-height:0;padding:0;accent-color:
 .ck{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:14px}
 .prev{margin-top:14px;padding:12px;border-radius:12px;background:var(--soft);font-size:13.5px;font-variant-numeric:tabular-nums}
 .prev div+div{margin-top:4px}
-.btn{display:block;width:100%;border-radius:14px;padding:15px;font-weight:800;background:var(--fg);color:var(--bg);font-size:16px;margin-top:16px}
+.btn{display:block;width:100%;border-radius:14px;padding:15px;font-weight:800;background:var(--acc);color:var(--accfg);font-size:16px;margin-top:16px}
 .btn.gh{background:var(--soft);color:var(--fg)}
 .btn.dg{background:none;color:var(--red);border:1.5px solid var(--red);margin-top:10px}
 .btn2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.btn3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.btn2 .btn,.btn3 .btn{margin-top:12px;padding:13px 6px;font-size:15px}
+.btn2 .btn{margin-top:10px;padding:13px 6px;font-size:15px}
 .feerow{display:grid;grid-template-columns:1.4fr 1fr 40px;gap:6px;margin-top:6px}
 .feerow button{background:var(--soft);border-radius:12px;font-size:16px}
 .ba{display:flex;justify-content:space-between;gap:8px;padding:12px;border-radius:12px;background:var(--soft);margin-bottom:12px;font-variant-numeric:tabular-nums;font-size:13.5px}
 .mi{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
 .mi span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mi .rt{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.pl{display:grid;grid-template-columns:1fr 130px;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
+.pl .pk{min-width:0}
+.pl .pk b{display:block;font-size:14.5px}
+.pl .pk span{font-size:12px;color:var(--mut)}
+.pl input{min-height:42px;padding:9px 10px;text-align:right;font-weight:700}
+.pl.past{opacity:.6}
+.pl.cur{box-shadow:inset 3px 0 0 var(--acc);padding-left:8px}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.sw button{border:1.5px solid var(--line);border-radius:14px;padding:8px;text-align:left;font-size:12.5px;font-weight:700}
+.sw button.on{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.sw i{display:flex;height:34px;border-radius:9px;margin-bottom:6px;overflow:hidden;border:1px solid rgba(128,128,128,.25)}
+.sw i b{flex:1}
+.dots{display:flex;flex-wrap:wrap;gap:10px}
+.dots button{width:40px;height:40px;border-radius:50%;border:2px solid var(--line)}
+.dots button.on{outline:2.5px solid var(--fg);outline-offset:2px}
+.dots label{width:40px;height:40px;border-radius:50%;border:2px dashed var(--mut);display:grid;place-items:center;font-size:18px;cursor:pointer;position:relative;overflow:hidden}
+.dots input[type=color]{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
 .hint{font-size:12.5px;color:var(--mut);margin-top:6px}
-.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:.2s;z-index:100;max-width:90vw;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--acc);color:var(--accfg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:.2s;z-index:100;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 .cats .ci{display:flex;justify-content:space-between;font-size:13px;margin-top:8px}
 .cats .bar{margin-top:3px;height:5px}
@@ -174,8 +189,8 @@ input[type=checkbox]{width:20px;height:20px;min-height:0;padding:0;accent-color:
         <div class="sm" style="margin-top:12px;opacity:.75">Net worth: <b id="tNet"></b> · Savings: <b id="tSav"></b></div>
       </div>
       <div class="grid2">
-        <div class="card"><div class="lbl">Monthly dues</div><div class="mid" id="tMon"></div><div class="sm mut" id="tMonN"></div></div>
-        <div class="card"><div class="lbl">Unpaid this period</div><div class="mid" id="tDue"></div><div class="sm mut" id="tDueN"></div></div>
+        <div class="card"><div class="lbl">Dues this month</div><div class="mid" id="tMon"></div><div class="sm mut" id="tMonN"></div></div>
+        <div class="card"><div class="lbl">Still unpaid</div><div class="mid" id="tDue"></div><div class="sm mut" id="tDueN"></div></div>
       </div>
       <div class="seg" id="dFil"><button data-v="act" class="on" type="button">Active</button><button data-v="paid" type="button">Paid</button><button data-v="all" type="button">All</button></div>
       <div class="sec"><h3>Debts &amp; Loans</h3><button class="lnk" id="addDebt" type="button">+ Add</button></div>
@@ -187,7 +202,6 @@ input[type=checkbox]{width:20px;height:20px;min-height:0;padding:0;accent-color:
 <button class="fab" id="fab" type="button" aria-label="Add">+</button>
 <dialog id="dlg"><div class="si" id="dlgIn"></div></dialog>
 <div class="toast" id="toast"></div>
-
 <script>
 (function(){
 'use strict';
@@ -200,13 +214,14 @@ var r2=function(n){return Math.round((+n||0)*100)/100};
 var num=function(v){var n=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,''));return isFinite(n)?r2(n):0};
 var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
 var live=function(a){return (a||[]).filter(function(x){return !x.del})};
-var byId=function(a,id){for(var i=0;i<a.length;i++)if(a[i].id===id)return a[i];return null};
+var byId=function(a,id){for(var i=0;i<(a||[]).length;i++)if(a[i].id===id)return a[i];return null};
 var localISO=function(d){d=d||new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)};
 var ymd=function(d){return localISO(d).slice(0,10)};
 var nf=new Intl.NumberFormat('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
 var dfm=new Intl.DateTimeFormat('en-PH',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
 var dfy=new Intl.DateTimeFormat('en-PH',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
 var ddf=new Intl.DateTimeFormat('en-PH',{month:'short',day:'numeric',year:'numeric'});
+var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function cur(){return (S&&S.settings.cur)||'₱'}
 function money(n){n=r2(n);return (n<0?'−':'')+cur()+nf.format(Math.abs(n))}
 function sgn(n){n=r2(n);return (n>0?'+':n<0?'−':'')+cur()+nf.format(Math.abs(n))}
@@ -217,9 +232,8 @@ function dtPos(dt){var t=new Date(dt).getTime();if(!isFinite(t))t=now();return t
 var TYPES={cash:'Cash',bank:'Bank',ewallet:'E-wallet'};
 var DEFCAT={out:['Food','Transport','Bills','Groceries','Shopping','Load/Data','Health','Others'],in:['Salary','Allowance','Business','Sideline','Gift','Refund','Others'],xfer:['Transfer','Cash-in','Cash-out','Savings']};
 var BANKS=['Cash','GCash','Maya','GoTyme','SeaBank','ShopeePay','GrabPay','Coins.ph','PayPal','BDO','BPI','Metrobank','UnionBank','Landbank','Security Bank','RCBC','PNB','China Bank','EastWest','CIMB','Tonik','Savings'];
-/* debt types */
 var DCATS=['SPayLater','Shopee Loan','LazPayLater','GGives','GLoan','GCredit','Maya Credit','Maya Loan','BillEase','Atome','Home Credit','Credit Card','Pag-IBIG Loan','SSS Loan','GSIS Loan','Bank Loan','Salary Loan','Car Loan','Housing Loan','Personal','Others'];
-var BNPL=/later|ggives|gcredit|maya credit|billease|atome|home credit|credit card/i; /* usually not cash received */
+var BNPL=/later|ggives|gcredit|maya credit|billease|atome|home credit|credit card/i;
 var FREQ={once:'One-time',weekly:'Weekly',semi:'Every 15 days',monthly:'Monthly',quarterly:'Quarterly',yearly:'Yearly'};
 var FMUL={once:0,weekly:52/12,semi:2,monthly:1,quarterly:1/3,yearly:1/12};
 
@@ -249,7 +263,18 @@ function period(freq,dueStr,ref){
   if(freq==='weekly'){var w=(ref.getDay()+6)%7,off=dueD?(dueD.getDay()+6)%7:6;return{s:ymd(new Date(y,m,dd-w)),e:ymd(new Date(y,m,dd-w+6)),due:ymd(new Date(y,m,dd-w+off))}}
   return null;
 }
-function freqText(d){var f=d.freq||'once';if(f==='once'||!num(d.inst))return FREQ[f]||'One-time';return FREQ[f]+' '+money(d.inst)}
+function nextPeriod(freq,due,p){var nx=new Date(p.e+'T00:00');nx.setDate(nx.getDate()+1);return period(freq,due,nx)}
+function prevPeriod(freq,due,p){var nx=new Date(p.s+'T00:00');nx.setDate(nx.getDate()-1);return period(freq,due,nx)}
+function plabel(f,p){var s=new Date(p.s+'T00:00'),m=MN[s.getMonth()],y=s.getFullYear();
+  if(f==='monthly')return m+' '+y;if(f==='yearly')return ''+y;if(f==='quarterly')return 'Q'+(Math.floor(s.getMonth()/3)+1)+' '+y;
+  if(f==='semi')return m+' '+s.getDate()+'–'+new Date(p.e+'T00:00').getDate()+', '+y;return 'Week of '+fdate(p.s)}
+function hasPlan(d){return !!(d.sched&&Object.keys(d.sched).length)}
+/* amount planned for a period: manual amount if set, otherwise default per payment */
+function planAmt(d,p){var s=d.sched||{};return Object.prototype.hasOwnProperty.call(s,p.s)?num(s[p.s]):num(d.inst)}
+function isSched(d){return d.freq&&d.freq!=='once'&&(num(d.inst)>0||hasPlan(d))}
+function nextDue(d,p){for(var i=0;i<120;i++){p=nextPeriod(d.freq,d.due,p);if(planAmt(d,p)>0)return p}return null}
+function freqText(d){var f=d.freq||'once';if(!isSched(d))return FREQ[f]||'One-time';return FREQ[f]+(hasPlan(d)?' · varies':' '+money(d.inst))}
+function upcoming(d,n){var out=[],p=period(d.freq,d.due,new Date());for(var i=0;i<60&&out.length<n;i++){var a=planAmt(d,p);if(a>0)out.push({p:p,a:a});p=nextPeriod(d.freq,d.due,p)}return out}
 
 /* ---------- compute ---------- */
 var C={};
@@ -272,16 +297,24 @@ function compute(){
   });
   var owe=0,rec=0,dm=new Map(),mo=0,monN=0,dueNow=0,dueN=0,overN=0;
   live(S.debts).forEach(function(d){
-    var tot=debtTotal(d),ps=pays[d.id]||[],pd=paid[d.id]||0,left=r2(Math.max(0,tot-pd)),freq=d.freq||'once',inst=num(d.inst);
-    var x={d:d,total:tot,paid:pd,left:left,n:ps.length,per:null,next:d.due||'9999',st:'',sc:''};
-    if(left>0&&freq!=='once'&&inst>0){
+    var tot=debtTotal(d),ps=pays[d.id]||[],pd=paid[d.id]||0,left=r2(Math.max(0,tot-pd)),freq=d.freq||'once';
+    var x={d:d,total:tot,paid:pd,left:left,n:ps.length,per:null,next:d.due||'9999',st:'',sc:'',pp:{}};
+    ps.forEach(function(t){x.pp[(t.dt||'').slice(0,10)]=1});
+    x.paidIn=function(p){var s=0;ps.forEach(function(t){var k=(t.dt||'').slice(0,10);if(k>=p.s&&k<=p.e)s+=num(t.amt)});return r2(s)};
+    if(left>0&&isSched(d)){
       var p=period(freq,d.due,tdy);
-      if(p){var pp=0;ps.forEach(function(t){var k=(t.dt||'').slice(0,10);if(k>=p.s&&k<=p.e)pp+=num(t.amt)});
-        var want=Math.min(left,inst),rem=r2(Math.max(0,want-pp));p.paid=r2(pp);p.rem=rem;x.per=p;
-        if(rem<=0){var nx=new Date(p.e+'T00:00');nx.setDate(nx.getDate()+1);var np=period(freq,d.due,nx);x.next=np.due;x.st='Paid this period · Next due '+fdate(np.due);x.sc='pos'}
+      if(p){var pp=x.paidIn(p),want=r2(Math.min(left,planAmt(d,p))),rem=r2(Math.max(0,want-pp));p.paid=pp;p.want=want;p.rem=rem;x.per=p;
+        if(want<=0||rem<=0){var np=nextDue(d,p);x.next=np?np.due:'9999';
+          x.st=(want<=0?'No payment this period':'Paid this period')+(np?' · Next '+fdate(np.due)+' '+money(Math.min(left,planAmt(d,np))):'');x.sc=want<=0?'':'pos'}
         else if(today>p.due){x.next=p.due;x.st='Overdue since '+fdate(p.due)+' · '+money(rem);x.sc='neg'}
         else{x.next=p.due;x.st='Due '+fdate(p.due)+' · '+money(rem);x.sc=''}
-        if(d.kind==='owe'){mo+=want*FMUL[freq];monN++;if(rem>0){dueNow+=rem;dueN++;if(today>p.due)overN++}}}
+        if(d.kind==='owe'){
+          /* dues this calendar month: sum of planned amounts of periods whose due date is in this month */
+          var q=period(freq,d.due,new Date(tdy.getFullYear(),tdy.getMonth(),1)),mw=0,mp=0,g=0;
+          while(q&&q.s<=mon+'-31'&&g<10){if(q.due.slice(0,7)===mon){var w=Math.min(left,planAmt(d,q));mw+=w;mp+=Math.min(w,x.paidIn(q))}q=nextPeriod(freq,d.due,q);g++}
+          if(freq==='yearly'||freq==='quarterly'){if(p.due.slice(0,7)===mon){mw=want;mp=Math.min(want,pp)}else{mw=0;mp=0}}
+          if(mw>0){mo+=mw;monN++}
+          if(rem>0){dueNow+=rem;dueN++;if(today>p.due)overN++}}}
     }else if(left>0&&d.due){x.st=(today>d.due?'Overdue since ':'Due ')+fdate(d.due);x.sc=today>d.due?'neg':''}
     else if(left<=0){x.st='Fully paid';x.sc='pos'}
     dm.set(d.id,x);if(d.kind==='owe')owe+=left;else rec+=left;
@@ -448,7 +481,8 @@ function debtForm(d){
     '<label class="f lbl" for="kAmt">'+(ed?'Total amount (current)':'Total amount')+'</label><input id="kAmt" class="amtin" style="margin-top:0" inputmode="decimal" placeholder="0.00" value="'+(ed?debtTotal(d):'')+'">'+
     (ed&&sumAdds?'<div class="hint">Includes '+money(sumAdds)+' added later.</div>':'')+
     '<div class="row2 eq"><div><label class="f lbl" for="kFreq">Payment schedule</label>'+freqSel('kFreq',ed?(d.freq||'once'):'monthly')+'</div>'+
-    '<div id="wInst"><label class="f lbl" for="kInst">Amount per payment</label><input id="kInst" inputmode="decimal" placeholder="0.00" value="'+(ed&&num(d.inst)?num(d.inst):'')+'"></div></div>'+
+    '<div id="wInst"><label class="f lbl" for="kInst">Usual amount per payment</label><input id="kInst" inputmode="decimal" placeholder="0.00" value="'+(ed&&num(d.inst)?num(d.inst):'')+'"></div></div>'+
+    '<div id="wVar"><label class="ck"><input type="checkbox" id="kVar"'+(ed&&hasPlan(d)?' checked':'')+'> Amount is different per month / period (I will enter each one)</label></div>'+
     '<div class="row2 eq"><div id="wTerms"><label class="f lbl" for="kTerms">No. of payments</label><input id="kTerms" inputmode="numeric" placeholder="Optional (e.g. 12)" value="'+(ed&&d.terms?d.terms:'')+'"></div>'+
     '<div><label class="f lbl" for="kDue" id="kDueL">Due date</label><input id="kDue" type="date" value="'+(ed&&d.due?d.due:'')+'"></div></div>'+
     '<div class="hint" id="kCalc"></div>'+
@@ -457,12 +491,13 @@ function debtForm(d){
     (ed?'':'<label class="ck"><input type="checkbox" id="kRec" checked> <span id="kRecL"></span></label><div id="wAcc"><div class="chips" id="kAcc" style="margin-top:8px"></div><div class="hint" id="kHint"></div></div>')+
     '<button type="button" class="btn" id="kSave">Save</button>'+(ed?'<button type="button" class="btn dg" id="kDel">Delete</button>':'')+
     '<datalist id="dlNames">'+Object.keys(names).map(function(n){return '<option value="'+esc(n)+'">'}).join('')+'</datalist>');
-  function calc(){var fr=$('#kFreq').value,amt=num($('#kAmt').value),tm=parseInt($('#kTerms').value,10)||0,once=fr==='once';
-    $('#wInst').hidden=once;$('#wTerms').hidden=once;$('#kDueL').textContent=once?'Due date':'First / next due date';
+  function calc(){var fr=$('#kFreq').value,amt=num($('#kAmt').value),tm=parseInt($('#kTerms').value,10)||0,once=fr==='once',vr=$('#kVar').checked;
+    $('#wInst').hidden=once;$('#wTerms').hidden=once;$('#wVar').hidden=once;$('#kDueL').textContent=once?'Due date':'First / next due date';
+    $('#kSave').textContent=(!once&&vr)?'Save & set amounts per period':'Save';
     if(!once&&autoInst&&amt&&tm)$('#kInst').value=r2(amt/tm);
     var ins=num($('#kInst').value),h='';
-    if(!once&&ins){h=FREQ[fr]+' '+money(ins)+' · about '+money(ins*FMUL[fr])+' per month';if(amt&&!tm)h+=' · ~'+Math.ceil(amt/ins)+' payments'}
-    if(!once&&$('#kDue').value)h+=(h?' · ':'')+'Due every '+({monthly:'month on day '+new Date($('#kDue').value+'T00:00').getDate(),yearly:'year',quarterly:'quarter',semi:'15th & end of month',weekly:'week'}[fr]||'');
+    if(!once&&vr)h='After saving, you can type a different amount for each '+({monthly:'month',yearly:'year',quarterly:'quarter',semi:'15 days',weekly:'week'}[fr])+'. Blank ones use the usual amount.';
+    else if(!once&&ins){h=FREQ[fr]+' '+money(ins)+' · about '+money(ins*FMUL[fr])+' per month';if(amt&&!tm)h+=' · ~'+Math.ceil(amt/ins)+' payments'}
     $('#kCalc').textContent=h}
   function paint(){seg($('#kType'),f.kind);$('#kCats').innerHTML=debtCatChips($('#kCat').value.trim());
     $('#kNameL').textContent=f.kind==='owe'?'Lender / item name':'Borrower (who owes me)';
@@ -475,19 +510,22 @@ function debtForm(d){
     if(!ed){$('#kRec').checked=!BNPL.test($('#kCat').value)}paint()});
   $('#kCat').addEventListener('input',function(){$$('#kCats .chip').forEach(function(b){b.classList.toggle('on',b.dataset.c===$('#kCat').value.trim())})});
   $('#kInst').addEventListener('input',function(){autoInst=!this.value;calc()});
-  ['kAmt','kTerms','kDue'].forEach(function(id){$('#'+id).addEventListener('input',calc)});$('#kFreq').addEventListener('change',calc);
+  ['kAmt','kTerms','kDue'].forEach(function(id){$('#'+id).addEventListener('input',calc)});$('#kFreq').addEventListener('change',calc);$('#kVar').addEventListener('change',calc);
   if(!ed){$('#kRec').addEventListener('change',paint);$('#kAcc').addEventListener('click',function(e){var b=e.target.closest('[data-id]');if(!b)return;f.acc=b.dataset.id;paint()})}
   $('#kSave').addEventListener('click',function(){
     var name=$('#kName').value.trim(),cat=$('#kCat').value.trim(),amt=num($('#kAmt').value);
     if(!name&&!cat){toast('Choose a type or enter a name');return}if(amt<=0){toast('Enter the total amount');return}
     if(ed&&amt<sumAdds){toast('Total cannot be less than added amounts ('+money(sumAdds)+')');return}
-    var fr=$('#kFreq').value,inst=num($('#kInst').value),terms=Math.max(0,parseInt($('#kTerms').value,10)||0);
+    var fr=$('#kFreq').value,inst=num($('#kInst').value),terms=Math.max(0,parseInt($('#kTerms').value,10)||0),vr=fr!=='once'&&$('#kVar').checked;
     if(fr!=='once'&&!inst&&terms)inst=r2(amt/terms);
-    var o=d||{id:uid()};o.kind=f.kind;o.cat=cat;o.name=name||cat;o.amt=ed?r2(amt-sumAdds):amt;o.freq=fr;o.inst=fr==='once'?0:inst;o.terms=fr==='once'?0:terms;
-    o.dt=$('#kDt').value||ymd();o.due=$('#kDue').value||'';o.note=$('#kNote').value.trim();o.adds=o.adds||[];o.u=now();
+    var o=d||{id:uid()},oldF=ed?d.freq:'';o.kind=f.kind;o.cat=cat;o.name=name||cat;o.amt=ed?r2(amt-sumAdds):amt;o.freq=fr;o.inst=fr==='once'?0:inst;o.terms=fr==='once'?0:terms;
+    o.dt=$('#kDt').value||ymd();o.due=$('#kDue').value||'';o.note=$('#kNote').value.trim();o.adds=o.adds||[];
+    if(!vr||fr==='once'||(ed&&oldF!==fr))o.sched={};else o.sched=o.sched||{};
+    o.u=now();
     if(!d){S.debts.push(o);
       if($('#kRec').checked&&f.acc){var dt=o.dt+localISO().slice(10);S.tx.push({id:uid(),u:now(),type:f.kind==='owe'?'in':'out',amt:amt,acc:f.acc,to:'',fee:0,feeName:'',note:(f.kind==='owe'?'Borrowed: ':'Lent to ')+o.name,cat:f.kind==='owe'?'Borrowed':'Lent',dt:dt,pos:dtPos(dt),debt:o.id,dr:'init'});S.local.lastAcc=f.acc}}
-    save();closeSheet();renderAll();toast('Saved');
+    save();renderAll();toast('Saved');
+    if(vr)planForm(o);else if(ed)debtView(o.id);else closeSheet();
   });
   var k=$('#kDel');if(k)k.addEventListener('click',function(){
     if(!confirm('Delete this debt / loan record?'))return;
@@ -496,34 +534,76 @@ function debtForm(d){
     d.del=true;d.u=now();save();closeSheet();renderAll();toast('Deleted')});
   paint();
 }
+
+/* ---------- payment plan: manual amount per month / period ---------- */
+function planForm(d){
+  if(!d.freq||d.freq==='once'){toast('Set a payment schedule first (e.g. Monthly)');debtForm(d);return}
+  var x=C.dm.get(d.id),fr=d.freq,today=ymd(),work=Object.assign({},d.sched||{});
+  var start=new Date(((d.dt&&d.due&&d.dt<d.due)?d.dt:(d.due||d.dt||today))+'T00:00');if(isNaN(start))start=new Date();
+  var first=period(fr,d.due,start),cp=period(fr,d.due,new Date());
+  /* show a few past periods (for reference) then the future */
+  var p=first,rows=[],back=0;while(p.s<cp.s&&back<400){p=nextPeriod(fr,d.due,p);back++}
+  p=first;var skip=Math.max(0,back-3);for(var i=0;i<skip;i++)p=nextPeriod(fr,d.due,p);
+  var cnt=Math.max(12,(d.terms||0)-skip+1,back-skip+12);
+  function build(n){rows=[];var q=p;for(var i=0;i<n;i++){rows.push(q);q=nextPeriod(fr,d.due,q)}}
+  build(cnt);
+  var unit={monthly:'month',yearly:'year',quarterly:'quarter',semi:'period',weekly:'week'}[fr];
+  var bx=openSheet(head('Amount per '+unit+' · '+esc(d.name))+
+    '<div class="ba"><div><div class="lbl">Remaining debt</div><b class="neg">'+money(x?x.left:debtTotal(d))+'</b></div><div style="text-align:right"><div class="lbl">Usual amount</div><b>'+(num(d.inst)?money(d.inst):'—')+'</b></div></div>'+
+    '<div class="hint" style="margin:0 0 8px">Type the exact amount for each '+unit+'. Leave blank to use the usual amount. Type 0 if there is no payment that '+unit+'.</div>'+
+    '<div class="row2" style="grid-template-columns:1fr auto;margin-top:0"><input id="plFill" inputmode="decimal" placeholder="Fill amount (e.g. 1000)"><button type="button" class="lnk" id="plFillB">Fill blanks</button></div>'+
+    '<div id="plRows" style="margin-top:8px"></div>'+
+    '<button type="button" class="lnk more" id="plMore">+ Show 12 more</button>'+
+    '<div class="prev" id="plSum"></div>'+
+    '<div class="btn2"><button type="button" class="btn gh" id="plClear">Clear all</button><button type="button" class="btn" id="plSave">Save</button></div>');
+  function paintRows(){
+    $('#plRows').innerHTML=rows.map(function(q){var has=Object.prototype.hasOwnProperty.call(work,q.s),pd=x?x.paidIn(q):0,past=q.e<today,isCur=q.s===cp.s;
+      return '<div class="pl'+(past?' past':'')+(isCur?' cur':'')+'"><div class="pk"><b>'+esc(plabel(fr,q))+(isCur?' · now':'')+'</b><span>Due '+fdate(q.due)+(pd?' · paid '+money(pd):'')+'</span></div>'+
+        '<input data-k="'+q.s+'" inputmode="decimal" placeholder="'+(num(d.inst)?nf.format(num(d.inst)):'0.00')+'" value="'+(has?num(work[q.s]):'')+'"></div>'}).join('');
+    sum()}
+  function sum(){var tot=0,fut=0,left=x?x.left:debtTotal(d);
+    rows.forEach(function(q){var a=Object.prototype.hasOwnProperty.call(work,q.s)?num(work[q.s]):num(d.inst);if(q.e>=today){fut+=Math.max(0,a-(x?x.paidIn(q):0))}tot+=a});
+    var diff=r2(left-fut);
+    $('#plSum').innerHTML='<div>Planned (this '+unit+' onward): <b>'+money(fut)+'</b></div><div>Remaining debt: <b>'+money(left)+'</b></div>'+
+      (Math.abs(diff)<0.01?'<div class="pos">Plan matches your remaining debt ✓</div>':diff>0?'<div class="neg">'+money(diff)+' not yet scheduled (show more '+unit+'s or adjust)</div>':'<div class="neg">Plan is '+money(-diff)+' more than the remaining debt</div>')}
+  $('#plRows').addEventListener('input',function(e){var k=e.target.dataset.k;if(!k)return;if(e.target.value.trim()==='')delete work[k];else work[k]=num(e.target.value);sum()});
+  $('#plFillB').addEventListener('click',function(){var v=$('#plFill').value.trim();if(v===''){toast('Type an amount first');return}var n=num(v);
+    rows.forEach(function(q){if(q.e>=today&&!Object.prototype.hasOwnProperty.call(work,q.s))work[q.s]=n});paintRows()});
+  $('#plMore').addEventListener('click',function(){build(rows.length+12);paintRows()});
+  $('#plClear').addEventListener('click',function(){if(!confirm('Clear all manual amounts? The usual amount will be used.'))return;work={};paintRows()});
+  $('#plSave').addEventListener('click',function(){d.sched=work;d.u=now();if(!num(d.inst)&&!hasPlan(d)){toast('Enter at least one amount');return}
+    save();renderAll();debtView(d.id);toast('Payment plan saved')});
+  paintRows();
+}
+
 /* add more to an existing debt (e.g. new SPayLater order) */
 function addForm(d){
   var accs=activeAccs(),owe=d.kind==='owe',x=C.dm.get(d.id),f={acc:defAcc(accs)},rec=!BNPL.test((d.cat||'')+' '+d.name)&&!!accs.length,hasSch=d.freq&&d.freq!=='once';
   openSheet(head((owe?'Add to ':'Lend more · ')+esc(d.name))+
-    '<div class="ba"><div><div class="lbl">Current remaining</div><b>'+money(x.left)+'</b></div><div style="text-align:right"><div class="lbl">Current per payment</div><b>'+(hasSch&&num(d.inst)?money(d.inst):'—')+'</b></div></div>'+
+    '<div class="ba"><div><div class="lbl">Current remaining</div><b>'+money(x.left)+'</b></div><div style="text-align:right"><div class="lbl">Usual per payment</div><b>'+(hasSch&&num(d.inst)?money(d.inst):'—')+'</b></div></div>'+
     '<input id="aaAmt" class="amtin" style="margin-top:0" inputmode="decimal" placeholder="0.00">'+
     '<label class="f lbl" for="aaNote">Description</label><input id="aaNote" placeholder="'+(owe?'e.g. New SPayLater order, top-up loan':'e.g. Additional loan')+'">'+
     '<label class="f lbl" for="aaDt">Date</label><input id="aaDt" type="date" value="'+ymd()+'">'+
     '<div class="row2 eq"><div><label class="f lbl" for="aaFreq">Payment schedule</label>'+freqSel('aaFreq',d.freq||'once')+'</div>'+
-    '<div id="wAaInst"><label class="f lbl" for="aaInst">New amount per payment</label><input id="aaInst" inputmode="decimal" value="'+(num(d.inst)||'')+'" placeholder="0.00"></div></div>'+
-    '<div id="wAaTerms"><label class="f lbl" for="aaTerms">Payments left (optional)</label><input id="aaTerms" inputmode="numeric" placeholder="e.g. 6"></div>'+
-    '<div class="hint">Update the amount per payment if your monthly/billing amount changed.</div>'+
+    '<div id="wAaInst"><label class="f lbl" for="aaInst">New usual amount</label><input id="aaInst" inputmode="decimal" value="'+(num(d.inst)||'')+'" placeholder="0.00"></div></div>'+
+    '<label class="ck" id="wAaVar"><input type="checkbox" id="aaVar" checked> Next: update the amount for each month / period</label>'+
     '<label class="ck"><input type="checkbox" id="aaRec"'+(rec?' checked':'')+'> '+(owe?'I received this as cash in an account':'I gave this money from an account')+'</label>'+
     '<div id="wAaAcc"><div class="chips" id="aaAcc" style="margin-top:8px"></div></div>'+
     '<div class="prev" id="aaPrev"></div><button type="button" class="btn" id="aaSave">Save</button>');
-  function paint(){var once=$('#aaFreq').value==='once';$('#wAaInst').hidden=once;$('#wAaTerms').hidden=once;
+  function paint(){var once=$('#aaFreq').value==='once';$('#wAaInst').hidden=once;$('#wAaVar').hidden=once;
     $('#wAaAcc').hidden=!$('#aaRec').checked;$('#aaAcc').innerHTML=accChips(accs,f.acc,true);
-    var a=num($('#aaAmt').value);$('#aaPrev').innerHTML='<div>New remaining: <b class="'+(owe?'neg':'pos')+'">'+money(x.left+a)+'</b></div>'+(!once&&num($('#aaInst').value)?'<div>New per payment: <b>'+money($('#aaInst').value)+'</b> · ~'+money(num($('#aaInst').value)*FMUL[$('#aaFreq').value])+'/month</div>':'')}
-  $('#aaAmt').addEventListener('input',paint);$('#aaInst').addEventListener('input',paint);$('#aaFreq').addEventListener('change',paint);$('#aaRec').addEventListener('change',paint);
+    var a=num($('#aaAmt').value);$('#aaPrev').innerHTML='<div>New remaining: <b class="'+(owe?'neg':'pos')+'">'+money(x.left+a)+'</b></div>'}
+  $('#aaAmt').addEventListener('input',paint);$('#aaFreq').addEventListener('change',paint);$('#aaRec').addEventListener('change',paint);
   $('#aaAcc').addEventListener('click',function(e){var b=e.target.closest('[data-id]');if(!b)return;f.acc=b.dataset.id;paint()});
   $('#aaSave').addEventListener('click',function(){
     var amt=num($('#aaAmt').value);if(amt<=0){toast('Enter the amount to add');return}
     var dt=$('#aaDt').value||ymd(),note=$('#aaNote').value.trim(),fr=$('#aaFreq').value;
     d.adds=d.adds||[];d.adds.push({id:uid(),amt:amt,dt:dt,note:note});
-    d.freq=fr;if(fr==='once'){d.inst=0;d.terms=0}else{d.inst=num($('#aaInst').value);var tm=parseInt($('#aaTerms').value,10)||0;if(tm)d.terms=x.n+tm}
+    if(fr!==d.freq)d.sched={};d.freq=fr;if(fr==='once'){d.inst=0;d.terms=0;d.sched={}}else d.inst=num($('#aaInst').value);
     d.u=now();
     if($('#aaRec').checked&&f.acc){var tdt=dt+localISO().slice(10);S.tx.push({id:uid(),u:now(),type:owe?'in':'out',amt:amt,acc:f.acc,to:'',fee:0,feeName:'',note:(owe?'Borrowed: ':'Lent to ')+d.name+(note?' – '+note:''),cat:owe?'Borrowed':'Lent',dt:tdt,pos:dtPos(tdt),debt:d.id,dr:'add'});S.local.lastAcc=f.acc}
-    save();renderAll();debtView(d.id);toast('Added to '+d.name)});
+    save();renderAll();toast('Added to '+d.name);
+    if(fr!=='once'&&$('#aaVar').checked)planForm(d);else debtView(d.id)});
   paint();setTimeout(function(){$('#aaAmt').focus()},120);
 }
 function payForm(d){
@@ -531,9 +611,9 @@ function payForm(d){
   if(!accs.length){toast('Add an account first');return}
   var f={acc:defAcc(accs)},fs={mode:'none',name:'',amt:0},def=(x.per&&x.per.rem)?x.per.rem:x.left;
   openSheet(head((owe?'Pay ':'Collect from ')+esc(d.name))+
-    '<div class="ba"><div><div class="lbl">Remaining</div><b class="'+(owe?'neg':'pos')+'">'+money(x.left)+'</b></div><div style="text-align:right"><div class="lbl">'+(x.per?'Due this period':'Paid so far')+'</div><b>'+(x.per?money(x.per.rem):money(x.paid))+'</b></div></div>'+
+    '<div class="ba"><div><div class="lbl">Remaining</div><b class="'+(owe?'neg':'pos')+'">'+money(x.left)+'</b></div><div style="text-align:right"><div class="lbl">'+(x.per?'Due '+esc(plabel(d.freq,x.per)):'Paid so far')+'</div><b>'+(x.per?money(x.per.rem):money(x.paid))+'</b></div></div>'+
     '<input id="pAmt" class="amtin" inputmode="decimal" placeholder="0.00" value="'+(def||'')+'">'+
-    '<div class="chips" id="pQuick" style="margin-top:8px;justify-content:center">'+(x.per&&num(d.inst)?'<button type="button" class="chip" data-v="'+Math.min(num(d.inst),x.left)+'">Per payment '+money(Math.min(num(d.inst),x.left))+'</button>':'')+'<button type="button" class="chip" data-v="'+x.left+'">Pay in full '+money(x.left)+'</button></div>'+
+    '<div class="chips" id="pQuick" style="margin-top:8px;justify-content:center">'+(x.per&&x.per.rem?'<button type="button" class="chip" data-v="'+x.per.rem+'">This period '+money(x.per.rem)+'</button>':'')+'<button type="button" class="chip" data-v="'+x.left+'">Pay in full '+money(x.left)+'</button></div>'+
     '<label class="f lbl">'+(owe?'Pay from':'Receive in')+'</label><div class="chips" id="pAcc"></div>'+feeHTML()+
     '<label class="f lbl" for="pDt">Date &amp; time</label><input id="pDt" type="datetime-local" value="'+localISO()+'">'+
     '<label class="f lbl" for="pNote">Note</label><input id="pNote" placeholder="Optional">'+
@@ -553,40 +633,83 @@ function payForm(d){
   paint();
 }
 function debtView(id){
-  var x=C.dm.get(id);if(!x){closeSheet();return}var d=x.d,owe=d.kind==='owe',pct=x.total?Math.min(100,x.paid/x.total*100):0,sch=d.freq&&d.freq!=='once'&&num(d.inst);
+  var x=C.dm.get(id);if(!x){closeSheet();return}var d=x.d,owe=d.kind==='owe',pct=x.total?Math.min(100,x.paid/x.total*100):0,sch=d.freq&&d.freq!=='once';
   var items=[{dt:d.dt,t:'Started',a:num(d.amt),k:'s'}];
   (d.adds||[]).forEach(function(a){if(!a.del)items.push({dt:a.dt,t:'Added'+(a.note?' · '+a.note:''),a:num(a.amt),k:'a',id:a.id})});
   live(S.tx).forEach(function(t){if(t.debt===id&&t.dr==='pay')items.push({dt:t.dt,t:(owe?'Payment':'Collected')+' · '+accName(t.acc),a:-num(t.amt),k:'p',id:t.id})});
   items.sort(function(a,b){return a.dt<b.dt?1:a.dt>b.dt?-1:0});
+  var up=(x.left>0&&isSched(d))?upcoming(d,4):[];
   var bx=openSheet(head(esc(d.name))+
     '<div class="t2" style="margin-bottom:6px"><span class="tag '+(owe?'neg':'pos')+'">'+(owe?'I owe':'Owed to me')+'</span>'+(d.cat&&d.cat!==d.name?'<span class="tag">'+esc(d.cat)+'</span>':'')+'</div>'+
     '<div class="lbl">Remaining</div><div class="big '+(x.left?(owe?'neg':'pos'):'')+'">'+money(x.left)+'</div>'+
     '<div class="bar"><i style="width:'+pct.toFixed(1)+'%"></i></div>'+
     '<div class="sm mut" style="margin-top:6px">Paid '+money(x.paid)+' of '+money(x.total)+' · Since '+fdate(d.dt)+'</div>'+
     '<div class="prev">'+
-      '<div>Schedule: <b>'+esc(freqText(d))+'</b>'+(sch?' · ~'+money(num(d.inst)*FMUL[d.freq])+'/month':'')+'</div>'+
+      '<div>Schedule: <b>'+esc(freqText(d))+'</b></div>'+
       (d.terms?'<div>Payments: <b>'+x.n+' of '+d.terms+'</b>'+(d.terms>x.n?' · '+(d.terms-x.n)+' left':'')+'</div>':(x.n?'<div>Payments made: <b>'+x.n+'</b></div>':''))+
-      (x.per?'<div>This period: paid <b>'+money(x.per.paid)+'</b> · still due <b class="'+(x.per.rem?'neg':'pos')+'">'+money(x.per.rem)+'</b></div>':'')+
+      (x.per&&x.per.want>0?'<div>'+esc(plabel(d.freq,x.per))+': due <b>'+money(x.per.want)+'</b> · paid <b>'+money(x.per.paid)+'</b> · left <b class="'+(x.per.rem?'neg':'pos')+'">'+money(x.per.rem)+'</b></div>':'')+
       (x.st?'<div class="'+x.sc+'">'+esc(x.st)+'</div>':'')+
+      (up.length?'<div class="mut">Upcoming: '+up.map(function(u){return esc(plabel(d.freq,u.p))+' '+money(Math.min(u.a,x.left))}).join(' · ')+'</div>':'')+
       (d.note?'<div>'+esc(d.note)+'</div>':'')+
     '</div>'+
-    '<div class="btn3"><button type="button" class="btn" id="vPay">'+(owe?'Pay':'Collect')+'</button><button type="button" class="btn gh" id="vAdd">+ Add</button><button type="button" class="btn gh" id="vEd">Edit</button></div>'+
+    '<div class="btn2"><button type="button" class="btn" id="vPay">'+(owe?'Pay':'Collect')+'</button><button type="button" class="btn gh" id="vAdd">+ Add amount</button></div>'+
+    '<div class="btn2"><button type="button" class="btn gh" id="vPlan">'+(sch?'Amount per '+({monthly:'month',yearly:'year',quarterly:'quarter',semi:'period',weekly:'week'}[d.freq]):'Set schedule')+'</button><button type="button" class="btn gh" id="vEd">Edit</button></div>'+
     '<div class="sec"><h3>History</h3><span class="sm mut">Tap a payment to edit</span></div>'+
     items.map(function(i){return '<div class="mi"'+(i.k==='p'?' data-t="'+i.id+'" style="cursor:pointer"':'')+'><span>'+esc(i.t)+' · '+esc(i.dt.length>10?fdt(i.dt):fdate(i.dt))+'</span><span class="rt"><b class="num '+(i.a<0?'pos':(owe?'neg':''))+'">'+(i.a<0?'−':'+')+money(Math.abs(i.a))+'</b>'+(i.k==='a'?'<button type="button" class="x" style="width:28px;height:28px;font-size:12px" data-ra="'+i.id+'" aria-label="Remove">✕</button>':'')+'</span></div>'}).join(''));
   $('#vPay').addEventListener('click',function(){payForm(d)});
   $('#vAdd').addEventListener('click',function(){addForm(d)});
+  $('#vPlan').addEventListener('click',function(){if(sch)planForm(d);else debtForm(d)});
   $('#vEd').addEventListener('click',function(){debtForm(d)});
   bx.addEventListener('click',function(e){
     var ra=e.target.closest('[data-ra]');if(ra){if(!confirm('Remove this added amount?'))return;var a=byId(d.adds,ra.dataset.ra);if(a){a.del=true;d.u=now();save();renderAll();debtView(id);toast('Removed')}return}
     var r=e.target.closest('[data-t]');if(r)txForm(byId(S.tx,r.dataset.t))});
 }
 
+/* ---------- themes ---------- */
+var THEMES={
+  light:{n:'Light',bg:'#ffffff',card:'#ffffff',soft:'#f2f2f4',line:'#e6e6e8',fg:'#1d1d1f',mut:'#6e6e73',acc:'#2c2c2e',dark:0},
+  soft:{n:'Soft grey',bg:'#f1f1f3',card:'#ffffff',soft:'#e9e9ec',line:'#dedee2',fg:'#1d1d1f',mut:'#6e6e73',acc:'#3a3a3c',dark:0},
+  paper:{n:'Warm white',bg:'#f7f5f0',card:'#fffdf8',soft:'#eeebe4',line:'#e2ded4',fg:'#22201c',mut:'#76716a',acc:'#3b3833',dark:0},
+  dim:{n:'Dim',bg:'#1c1c1e',card:'#242426',soft:'#2e2e31',line:'#38383b',fg:'#ececee',mut:'#9a9aa0',acc:'#4a4a4f',dark:1},
+  grey:{n:'Dark grey',bg:'#2b2b2e',card:'#333337',soft:'#3d3d42',line:'#47474c',fg:'#f0f0f2',mut:'#a8a8ae',acc:'#57575d',dark:1},
+  black:{n:'Black',bg:'#000000',card:'#0d0d0d',soft:'#171717',line:'#242424',fg:'#ffffff',mut:'#9a9a9a',acc:'#2c2c2e',dark:1}
+};
+var ACCENTS=[['','Default'],['#2c2c2e','Charcoal'],['#48484a','Graphite'],['#6b6b70','Grey'],['#5a6270','Steel'],['#3d4a5c','Slate'],['#1f3a5f','Navy'],['#1f5c5a','Teal'],['#4a3a5c','Plum'],['#d9d9de','Silver']];
+function lum(h){h=(h||'').replace('#','');if(h.length===3)h=h.replace(/./g,'$&$&');var r=parseInt(h.slice(0,2),16)/255,g=parseInt(h.slice(2,4),16)/255,b=parseInt(h.slice(4,6),16)/255;if(!isFinite(r+g+b))return 0;
+  function c(v){return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}return .2126*c(r)+.7152*c(g)+.0722*c(b)}
+function themeKey(){var t=S.settings.theme||'auto';if(t==='auto')return (window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dim':'light';if(t==='dark')return 'dim';return THEMES[t]?t:'light'}
+function applyTheme(){
+  var k=themeKey(),T=THEMES[k],acc=/^#[0-9a-f]{6}$/i.test(S.settings.accent||'')?S.settings.accent:T.acc,lt=lum(acc)>.4,r=document.documentElement.style;
+  r.setProperty('--bg',T.bg);r.setProperty('--card',T.card);r.setProperty('--soft',T.soft);r.setProperty('--line',T.line);r.setProperty('--fg',T.fg);r.setProperty('--mut',T.mut);
+  r.setProperty('--acc',acc);r.setProperty('--accfg',lt?'#1d1d1f':'#ffffff');
+  r.setProperty('--red',T.dark?'#ff5c6a':'#d0021b');r.setProperty('--green',T.dark?'#34d67a':'#08883a');
+  r.setProperty('--hpos',lt?'#067a33':'#5fe39a');r.setProperty('--hneg',lt?'#c0001a':'#ff8a95');
+  r.setProperty('--sh',T.dark?'rgba(0,0,0,.55)':'rgba(0,0,0,.16)');r.colorScheme=T.dark?'dark':'light';
+  document.documentElement.dataset.theme=T.dark?'dark':'light';$('meta[name=theme-color]').content=T.bg;
+}
+function themeHTML(){var cur=S.settings.theme||'auto',ac=S.settings.accent||'';
+  var sw=[['auto','Auto (phone)',THEMES.light,THEMES.dim]].concat(Object.keys(THEMES).map(function(k){return [k,THEMES[k].n,THEMES[k]]}));
+  return '<label class="f lbl">Background</label><div class="sw" id="sTheme">'+sw.map(function(s){var A=s[2],B=s[3]||s[2];
+    return '<button type="button" data-v="'+s[0]+'" class="'+(s[0]===cur||(cur==='dark'&&s[0]==='dim')?'on':'')+'"><i><b style="background:'+A.bg+'"></b><b style="background:'+A.acc+'"></b>'+(s[3]?'<b style="background:'+B.bg+'"></b><b style="background:'+B.acc+'"></b>':'<b style="background:'+A.card+'"></b>')+'</i>'+s[1]+'</button>'}).join('')+'</div>'+
+  '<label class="f lbl">Main color (cards, buttons)</label><div class="dots" id="sAcc">'+ACCENTS.map(function(a){var c=a[0]||THEMES[themeKey()].acc;
+    return '<button type="button" data-v="'+a[0]+'" title="'+a[1]+'" aria-label="'+a[1]+'" class="'+(a[0]===ac?'on':'')+'" style="background:'+c+'">'+(a[0]?'':'<span style="color:'+(lum(c)>.4?'#000':'#fff')+';font-size:11px;font-weight:800">A</span>')+'</button>'}).join('')+
+  '<label title="Custom color" aria-label="Custom color">🎨<input type="color" id="sAccC" value="'+(/^#[0-9a-f]{6}$/i.test(ac)?ac:'#4a4a4f')+'"></label></div>'+
+  '<div class="hint">Red and green stay for money out / money in.</div>'}
+function bindTheme(){
+  $('#sTheme').addEventListener('click',function(e){var b=e.target.closest('[data-v]');if(!b)return;S.settings.theme=b.dataset.v;S.settings.u=now();applyTheme();$$('#sTheme button').forEach(function(x){x.classList.toggle('on',x===b)});refreshDots();save()});
+  $('#sAcc').addEventListener('click',function(e){var b=e.target.closest('button[data-v]');if(!b)return;S.settings.accent=b.dataset.v;S.settings.u=now();applyTheme();refreshDots();save()});
+  $('#sAccC').addEventListener('input',function(){S.settings.accent=this.value;S.settings.u=now();applyTheme();refreshDots()});
+  $('#sAccC').addEventListener('change',function(){save()});
+  function refreshDots(){var ac=S.settings.accent||'';$$('#sAcc button').forEach(function(x){x.classList.toggle('on',x.dataset.v===ac);if(!x.dataset.v)x.style.background=THEMES[themeKey()].acc})}
+}
+
 /* ---------- settings ---------- */
 function settingsForm(){
   var L=S.local,st=S.settings,ms=memoList();
   var bx=openSheet(head('Settings')+
-    '<label class="f lbl">Theme</label><div class="seg" id="sTheme"><button type="button" data-v="auto">Auto</button><button type="button" data-v="light">Light</button><button type="button" data-v="dark">Dark</button></div>'+
-    '<div class="row2" style="grid-template-columns:2fr 1fr"><div><label class="f lbl" for="sBud">Monthly budget</label><input id="sBud" inputmode="decimal" placeholder="0 = off" value="'+(st.budget||'')+'"></div><div><label class="f lbl" for="sCur">Currency</label><input id="sCur" value="'+esc(st.cur)+'" maxlength="4"></div></div>'+
+    '<div class="sec" style="margin-top:0"><h3>Theme &amp; colors</h3></div>'+themeHTML()+
+    '<div class="sec"><h3>General</h3></div>'+
+    '<div class="row2" style="grid-template-columns:2fr 1fr;margin-top:0"><div><label class="f lbl" for="sBud">Monthly budget</label><input id="sBud" inputmode="decimal" placeholder="0 = off" value="'+(st.budget||'')+'"></div><div><label class="f lbl" for="sCur">Currency</label><input id="sCur" value="'+esc(st.cur)+'" maxlength="4"></div></div>'+
     '<div class="sec"><h3>Cloud sync (Google Sheets)</h3></div>'+
     '<label class="f lbl" for="sUrl">Web App URL</label><input id="sUrl" placeholder="https://script.google.com/macros/s/.../exec" value="'+esc(L.syncUrl)+'" autocomplete="off">'+
     '<label class="f lbl" for="sTok">Secret key</label><input id="sTok" placeholder="Same key as in the Apps Script" value="'+esc(L.token)+'" autocomplete="off">'+
@@ -594,22 +717,21 @@ function settingsForm(){
     '<div class="btn2"><button type="button" class="btn" id="sSave">Save settings</button><button type="button" class="btn gh" id="sSync">Sync now</button></div>'+
     '<div class="sec"><h3>Backup</h3></div>'+
     '<div class="btn2"><button type="button" class="btn gh" id="sExp">Export backup</button><button type="button" class="btn gh" id="sImpB">Import backup</button></div>'+
-    '<button type="button" class="btn gh" id="sCsv">Export to Excel (CSV)</button><input type="file" id="sImp" accept=".json,application/json" hidden>'+
+    '<button type="button" class="btn gh" id="sCsv" style="margin-top:10px">Export to Excel (CSV)</button><input type="file" id="sImp" accept=".json,application/json" hidden>'+
     '<div class="sec"><h3>Saved entries</h3><span class="sm mut">'+ms.length+'</span></div>'+
     (ms.length?ms.map(function(m){return '<div class="mi"><span>'+esc(m.note)+' · '+money(m.amt)+' · '+esc(m.cat||'')+'</span><button type="button" class="x" data-mk="'+esc(m.note.toLowerCase())+'" aria-label="Forget">✕</button></div>'}).join(''):'<div class="hint">Descriptions you type are saved here automatically.</div>')+
     '<div class="sec"><h3>Danger zone</h3></div><button type="button" class="btn dg" id="sWipe">Erase all data</button>'+
     '<div class="hint" style="text-align:center;margin-top:14px">Data stays on this device until you erase it.</div>');
-  var th=st.theme;seg($('#sTheme'),th);
-  $('#sTheme').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;th=b.dataset.v;seg($('#sTheme'),th);S.settings.theme=th;applyTheme()});
-  function keep(){S.settings.theme=th;S.settings.budget=num($('#sBud').value);S.settings.cur=$('#sCur').value.trim()||'₱';S.settings.u=now();L.syncUrl=$('#sUrl').value.trim();L.token=$('#sTok').value.trim()}
+  bindTheme();
+  function keep(){S.settings.budget=num($('#sBud').value);S.settings.cur=$('#sCur').value.trim()||'₱';S.settings.u=now();L.syncUrl=$('#sUrl').value.trim();L.token=$('#sTok').value.trim()}
   $('#sSave').addEventListener('click',function(){keep();save();renderAll();closeSheet();toast('Settings saved');if(L.syncUrl)sync(true)});
   $('#sSync').addEventListener('click',function(){keep();persist();closeSheet();sync(true)});
   $('#sExp').addEventListener('click',function(){download('money-tracker-backup-'+ymd()+'.json',JSON.stringify(shareable()),'application/json')});
   $('#sImpB').addEventListener('click',function(){$('#sImp').click()});
   $('#sImp').addEventListener('change',function(){var fl=this.files[0];if(!fl)return;var rd=new FileReader();rd.onload=function(){try{var dt=JSON.parse(rd.result);if(!dt.accounts)throw 0;
     if(confirm('OK = Merge with current data (recommended)\nCancel = Replace everything')){mergeIn(dt)}else{if(!confirm('Replace ALL current data with this backup?'))return;var lc=S.local;S=Object.assign(blank(),dt);S.local=lc;}
-    save();renderAll();closeSheet();toast('Backup imported')}catch(e){toast('Invalid backup file')}};rd.readAsText(fl)});
-  $('#sCsv').addEventListener('click',function(){var sh=sheetRows(),out=[];['Transactions','Debts'].forEach(function(k,i){if(i)out.push([],[k.toUpperCase()]);sh[k].forEach(function(r){out.push(r)})});
+    save();applyTheme();renderAll();closeSheet();toast('Backup imported')}catch(e){toast('Invalid backup file')}};rd.readAsText(fl)});
+  $('#sCsv').addEventListener('click',function(){var sh=sheetRows(),out=[];['Transactions','Debts','Debt Schedule'].forEach(function(k,i){if(i)out.push([],[k.toUpperCase()]);sh[k].forEach(function(r){out.push(r)})});
     download('money-tracker-'+ymd()+'.csv','\ufeff'+out.map(function(r){return r.map(function(c){c=String(c);return /[",\n]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c}).join(',')}).join('\r\n'),'text/csv')});
   bx.addEventListener('click',function(e){var b=e.target.closest('[data-mk]');if(!b)return;var m=S.memo[b.dataset.mk];if(m){m.del=true;m.u=now();save();b.parentNode.remove();toast('Forgotten')}});
   $('#sWipe').addEventListener('click',function(){var a=prompt('This erases ALL accounts, transactions and debts (also from cloud sync).\nType DELETE to confirm.');if(a!=='DELETE')return;
@@ -617,7 +739,6 @@ function settingsForm(){
     S.accounts.push({id:uid(),u:t,name:'Cash',type:'cash',init:0,fees:[],sav:false,hide:false});accF='';save();renderAll();closeSheet();toast('All data erased')});
 }
 function download(name,data,type){var b=new Blob([data],{type:type}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},500)}
-function applyTheme(){var m=S.settings.theme||'auto',dk=m==='dark'||(m==='auto'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=dk?'dark':'light';$('meta[name=theme-color]').content=dk?'#000000':'#ffffff'}
 
 /* ---------- sync ---------- */
 function shareable(){return{ver:1,accounts:S.accounts,tx:S.tx,debts:S.debts,memo:S.memo,settings:S.settings}}
@@ -628,10 +749,13 @@ function mergeIn(R){S.accounts=mergeArr(S.accounts,R.accounts);S.tx=mergeArr(S.t
 function sheetRows(){compute();var T=[['Date','Type','Description','Category','Account','To','Amount','Fee','Fee name','Total balance after']];
   C.list.forEach(function(t){var r=C.run.get(t.id);T.push([t.dt.replace('T',' '),{in:'Income',out:'Expense',xfer:'Transfer'}[t.type],t.note||'',t.cat||'',accName(t.acc),t.type==='xfer'?accName(t.to):'',num(t.amt),num(t.fee),t.feeName||'',r?r.t:''])});
   var A=[['Account','Type','Balance','Savings','Hidden','Saved fees']];live(S.accounts).forEach(function(a){A.push([a.name,TYPES[a.type]||a.type,C.bal[a.id]||0,a.sav?'Yes':'',a.hide?'Yes':'',(a.fees||[]).map(function(f){return f.name+' '+f.amt}).join('; ')])});
-  var D=[['Name','Type','Kind','Total','Paid','Remaining','Schedule','Per payment','Monthly equivalent','Payments made','No. of payments','Due this period','Status','Started','Note']];
-  C.dm.forEach(function(x){var d=x.d,fr=d.freq||'once';D.push([d.name,d.cat||'',d.kind==='owe'?'I owe':'Owed to me',x.total,x.paid,x.left,FREQ[fr]||fr,num(d.inst),r2(Math.min(x.left,num(d.inst))*(FMUL[fr]||0)),x.n,d.terms||'',x.per?x.per.rem:'',x.st,d.dt,d.note||''])});
-  var M=[['Item','Amount'],['Total money',C.total],['Savings',C.sav],['Spendable',r2(C.total-C.sav)],['Debt (I owe)',C.owe],['Monthly debt dues',C.mon],['Unpaid dues this period',C.dueNow],['Receivable',C.rec],['Net worth',r2(C.total+C.rec-C.owe)],['Updated',localISO().replace('T',' ')]];
-  return{Summary:M,Transactions:T,Accounts:A,Debts:D}}
+  var D=[['Name','Type','Kind','Total','Paid','Remaining','Schedule','Usual amount','Varies per period','Payments made','No. of payments','Due this period','Still unpaid this period','Status','Started','Note']];
+  var P=[['Name','Period','Due date','Planned amount','Paid']];
+  C.dm.forEach(function(x){var d=x.d,fr=d.freq||'once';
+    D.push([d.name,d.cat||'',d.kind==='owe'?'I owe':'Owed to me',x.total,x.paid,x.left,FREQ[fr]||fr,num(d.inst),hasPlan(d)?'Yes':'',x.n,d.terms||'',x.per?x.per.want:'',x.per?x.per.rem:'',x.st,d.dt,d.note||'']);
+    if(x.left>0&&isSched(d))upcoming(d,12).forEach(function(u){P.push([d.name,plabel(fr,u.p),u.p.due,Math.min(u.a,x.left),x.paidIn(u.p)])})});
+  var M=[['Item','Amount'],['Total money',C.total],['Savings',C.sav],['Spendable',r2(C.total-C.sav)],['Debt (I owe)',C.owe],['Debt dues this month',C.mon],['Still unpaid this period',C.dueNow],['Receivable',C.rec],['Net worth',r2(C.total+C.rec-C.owe)],['Updated',localISO().replace('T',' ')]];
+  return{Summary:M,Transactions:T,Accounts:A,Debts:D,'Debt Schedule':P}}
 var syncT,syncing=false,syncErr='';
 function schedSync(){paintSync();if(!S.local.syncUrl)return;clearTimeout(syncT);syncT=setTimeout(function(){sync(false)},2500)}
 function paintSync(){var b=$('#syncBtn'),L=S.local;
@@ -645,7 +769,7 @@ function sync(manual){
     if(!j.ok)throw new Error(j.error||'Error');if(j.data&&j.data.accounts)mergeIn(j.data);
     return fetch(base,{method:'POST',body:JSON.stringify({token:L.token,data:shareable(),sheets:sheetRows()})})
   }).then(function(r){return r.json()}).then(function(j){if(!j.ok)throw new Error(j.error||'Error');
-    L.lastSync=now();L.dirty=false;persist();syncing=false;renderAll();if(manual)toast('Synced')
+    L.lastSync=now();L.dirty=false;persist();syncing=false;if(!dlg.open)renderAll();else paintSync();if(manual)toast('Synced')
   }).catch(function(e){syncing=false;syncErr=e.message||'error';paintSync();if(manual)toast('Sync failed: '+syncErr)});
 }
 window.addEventListener('online',function(){if(S.local.syncUrl)sync(false)});
@@ -665,7 +789,7 @@ function renderBudget(){
   var h='';
   if(bud){var p=spent/bud*100;h+='<div class="lbl">Monthly budget</div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:2px;gap:8px"><span class="mid">'+money(spent)+' <span class="sm mut">of '+money(bud)+'</span></span><b class="sm '+(spent>bud?'neg':'pos')+'">'+(spent>bud?money(spent-bud)+' over':money(bud-spent)+' left')+'</b></div><div class="bar'+(spent>bud?' over':'')+'"><i style="width:'+Math.min(100,p).toFixed(1)+'%"></i></div>'}
   else h+='<div style="display:flex;justify-content:space-between;align-items:center"><div><div class="lbl">Monthly budget</div><div class="sm mut">Not set</div></div><button type="button" class="lnk" id="setBud">Set budget</button></div>';
-  if(C.monN)h+='<div style="display:flex;justify-content:space-between;gap:8px;margin-top:14px;font-size:13.5px"><span class="mut">Debt dues ('+money(C.mon)+'/month)</span><b class="num '+(C.dueNow?'neg':'pos')+'">'+(C.dueNow?money(C.dueNow)+' unpaid':'All paid ✓')+'</b></div>';
+  if(C.monN||C.dueN)h+='<div style="display:flex;justify-content:space-between;gap:8px;margin-top:14px;font-size:13.5px"><span class="mut">Debt dues this month ('+money(C.mon)+')</span><b class="num '+(C.dueNow?'neg':'pos')+'">'+(C.dueNow?money(C.dueNow)+' unpaid':'All paid ✓')+'</b></div>';
   if(cats.length)h+='<div class="cats" style="margin-top:14px"><div class="lbl">Top spending this month</div>'+cats.map(function(c){return '<div class="ci"><span>'+esc(c)+'</span><b class="num">'+money(st.cats[c])+'</b></div><div class="bar"><i style="width:'+(st.cats[c]/mx*100).toFixed(1)+'%"></i></div>'}).join('')+'</div>';
   $('#budCard').innerHTML=h;var sb=$('#setBud');if(sb)sb.addEventListener('click',settingsForm);
   var accs=live(S.accounts);
@@ -695,7 +819,7 @@ function renderDebt(){
   $('#tOwe').innerHTML='<span class="'+(C.owe?'neg':'')+'">'+money(C.owe)+'</span>';$('#tRec').innerHTML='<span class="'+(C.rec?'pos':'')+'">'+money(C.rec)+'</span>';
   $('#tMoney').textContent=money(C.total);$('#tAfter').innerHTML='<span class="'+(after<0?'neg':'')+'">'+money(after)+'</span>';
   $('#tNet').innerHTML='<span class="'+cls(net)+'">'+money(net)+'</span>';$('#tSav').textContent=money(C.sav);
-  $('#tMon').textContent=money(C.mon);$('#tMonN').textContent=C.monN?C.monN+' installment'+(C.monN>1?'s':''):'No installments';
+  $('#tMon').textContent=money(C.mon);$('#tMonN').textContent=C.monN?C.monN+' loan'+(C.monN>1?'s':'')+' due this month':'No dues this month';
   $('#tDue').innerHTML='<span class="'+(C.dueNow?'neg':'')+'">'+money(C.dueNow)+'</span>';
   $('#tDueN').innerHTML=C.overN?'<span class="neg">'+C.overN+' overdue</span>':(C.dueN?C.dueN+' to pay':(C.monN?'<span class="pos">All paid ✓</span>':'—'));
   var all=Array.from(C.dm.values()),cs={};
@@ -708,7 +832,7 @@ function renderDebt(){
   $('#dList').innerHTML=arr.length?arr.map(function(x){var d=x.d,owe=d.kind==='owe',pct=x.total?Math.min(100,x.paid/x.total*100):0;
     return '<div class="card debt" data-d="'+d.id+'"><div class="top"><b>'+esc(d.name)+'</b><span class="mid '+(x.left?(owe?'neg':'pos'):'')+'">'+money(x.left)+'</span></div>'+
     '<div class="t2" style="margin-top:4px"><span class="tag '+(owe?'neg':'pos')+'">'+(owe?'I owe':'Owed to me')+'</span>'+(d.cat&&d.cat!==d.name?'<span class="tag">'+esc(d.cat)+'</span>':'')+'</div>'+
-    '<div class="sched"><span>'+esc(freqText(d))+(d.terms?' · '+x.n+'/'+d.terms+' paid':'')+'</span></div>'+
+    '<div class="sched"><span>'+esc(freqText(d))+(d.terms?' · '+x.n+'/'+d.terms+' paid':'')+'</span>'+(x.per&&x.per.want>0?'<b class="num">'+money(x.per.want)+'</b>':'')+'</div>'+
     (x.st?'<div class="sched"><span class="'+x.sc+'">'+esc(x.st)+'</span></div>':'')+
     '<div class="bar"><i style="width:'+pct.toFixed(1)+'%"></i></div><div class="t2" style="margin-top:6px">Paid '+money(x.paid)+' of '+money(x.total)+'</div></div>'}).join(''):'<div class="empty">'+(dFil==='act'?'No active debts or loans. 🎉':'Nothing here.')+'<br>Tap "+ Add" to record SPayLater, Pag-IBIG, SSS loan, etc.</div>';
 }
@@ -768,7 +892,7 @@ $('#dList').addEventListener('click',function(e){var c=e.target.closest('[data-d
 $('#dFil').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;dFil=b.dataset.v;seg($('#dFil'),dFil);renderDebt()});
 $('#dCat').addEventListener('click',function(e){var b=e.target.closest('[data-c]');if(!b)return;dCat=b.dataset.c;renderDebt()});
 if(window.matchMedia)try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme)}catch(e){}
-window.addEventListener('storage',function(e){if(e.key===KEY){load();renderAll()}});
+window.addEventListener('storage',function(e){if(e.key===KEY){load();applyTheme();renderAll()}});
 
 /* ---------- start ---------- */
 load();applyTheme();renderAll();

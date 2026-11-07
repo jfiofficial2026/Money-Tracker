@@ -41,7 +41,7 @@ function merge_(a, b) {
   return { ver: 1, accounts: arr(a.accounts, b.accounts), tx: arr(a.tx, b.tx), debts: arr(a.debts, b.debts), memo: memo, settings: s || {} };
 }
 
-/* Readable tabs: Summary, Transactions, Accounts, Debts */
+/* Readable tabs: Summary, Transactions, Accounts, Debts, Debt Schedule */
 function writeSheets_(sheets) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   Object.keys(sheets).forEach(name => {
