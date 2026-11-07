@@ -1,0 +1,78 @@
+MONEY TRACKER - SETUP GUIDE
+===========================
+
+FILES
+- index.html, sw.js, manifest.json, icon-192.png, icon-512.png  -> the app (upload all together)
+- Code.gs                                                        -> Google Sheets cloud sync (optional but recommended)
+
+
+STEP 1 - PUT THE APP ONLINE (free, so it works on phone + PC)
+-------------------------------------------------------------
+Option A: GitHub Pages
+1. Create a free account at github.com
+2. New repository (example name: money-tracker), set to Public
+3. "Add file" > "Upload files" > upload the 5 app files > Commit
+4. Settings > Pages > Source: "Deploy from a branch" > Branch: main / (root) > Save
+5. After 1-2 minutes, your link will be: https://YOUR-USERNAME.github.io/money-tracker/
+
+Option B (PC only, quick test): just double-click index.html.
+Note: data opened this way stays only in that PC browser and will not work offline as an app.
+
+
+STEP 2 - INSTALL ON SAMSUNG A35
+-------------------------------
+1. Open your link in Chrome (or Samsung Internet)
+2. Menu (3 dots) > "Add to Home screen" / "Install app"
+3. Open it from the home screen icon. It works even without internet.
+
+On PC/Laptop: open the same link in Chrome/Edge > click the install icon in the address bar.
+
+
+STEP 3 - CLOUD SYNC WITH GOOGLE SHEETS (same data on phone and PC)
+------------------------------------------------------------------
+1. Go to sheets.google.com > create a blank spreadsheet (name: Money Tracker)
+2. Extensions > Apps Script
+3. Delete the sample code, paste everything from Code.gs
+4. Change SECRET_KEY to your own secret (example: 'Jf2026-mysecret') > Save
+5. Deploy > New deployment > gear icon > Web app
+     Execute as: Me
+     Who has access: Anyone
+   > Deploy > Authorize access (choose your Google account > Advanced > Go to project > Allow)
+6. Copy the Web App URL (ends with /exec)
+7. In the app: Settings > Cloud sync > paste the URL + the same secret key > Save settings
+8. Do the same Step 7 on your other device. Done.
+
+How sync works:
+- Every change is saved on the device first (works offline).
+- When online, it syncs automatically a few seconds after each change, and when you open the app.
+- If you edit on 2 devices, both changes are kept (newest version of each item wins).
+- Your Google Sheet will show readable tabs: Summary, Transactions, Accounts, Debts.
+- Do not edit or delete the hidden "_data" tab. It holds the full app data.
+- If you update Code.gs later: Deploy > Manage deployments > Edit > Version: New version > Deploy.
+
+
+KEEPING YOUR DATA SAFE
+----------------------
+- Data is never deleted unless YOU delete it (Settings > Erase all data needs you to type DELETE).
+- Do not clear browser data/site data for your app link. If you did, just open the app again:
+  cloud sync will download everything back.
+- Extra safety: Settings > Export backup (JSON). Use Import backup to restore.
+- Settings > Export to Excel (CSV) for a spreadsheet copy.
+
+
+HOW TO USE
+----------
+- Swipe left/right (phone) to switch: Budget & Expense <-> Debt. On PC both show side by side.
+- + button: add Expense / Income / Transfer.
+- Fees: add saved fees per account (Accounts > ... > Fees), or choose "+ Other fee" while adding.
+  The fee is deducted from the account and shown in red.
+- Descriptions you type are remembered. Next time, tap them in "Quick add" or pick from suggestions
+  (amount, category, account and fee fill in automatically).
+- History shows each item with the balance after it (like online banking). Tap an item to see
+  Balance before -> Balance after, edit, or delete.
+- Drag the ⋮⋮ handle up/down to move an item. Balances recompute right away.
+  "Sort by date" puts everything back in date & time order.
+- Tap an account card to see only its history and running balance. Tap again to show all.
+- Mark an account as "Savings" to track your ipon. Spendable = Total money - Savings.
+- Debt page: record "I owe" or "Owed to me", pay/collect in parts, set due dates (overdue shows red).
+  Payments are linked to your accounts, so your total money and net worth always match.
